@@ -1,0 +1,109 @@
+<!DOCTYPE HTML>
+<HTML>
+    <HEAD> 
+        <TITLE>Agenda Cita</TITLE> 
+        <LINK HREF="Estilos.css" REL="STYLESHEET" TYPE="TEXT/CSS"/>
+        <script>
+            function validarFormulario(event) {
+                event.preventDefault(); // Evita que el formulario se envíe automáticamente
+                
+                let campos = document.querySelectorAll("input, select, textarea");
+                let formularioValido = true;
+
+                campos.forEach(campo => {
+                    if (campo.value.trim() === "") {
+                        formularioValido = false;
+                        campo.style.border = "2px solid red"; // Resalta el campo vacío
+                        if (!campo.nextElementSibling || campo.nextElementSibling.className !== "error") {
+                            let mensajeError = document.createElement("span");
+                            mensajeError.className = "error";
+                            mensajeError.style.color = "red";
+                            mensajeError.innerText = "Necesita llenar este campo";
+                            campo.parentNode.insertBefore(mensajeError, campo.nextSibling);
+                        }
+                    } else {
+                        campo.style.border = ""; // Quita el borde rojo si el campo está lleno
+                        if (campo.nextElementSibling && campo.nextElementSibling.className === "error") {
+                            campo.nextElementSibling.remove(); // Elimina el mensaje de error si el campo está lleno
+                        }
+                    }
+                });
+
+                if (formularioValido) {
+                    alert("¡Su cita fue agendada con éxito!");
+                    document.getElementById("formulario").submit(); // Envía el formulario si es válido
+                }
+            }
+        </script>
+    </HEAD>
+    <body>
+    <header>
+        <img src="Logo imss.jpg">
+        <IMG  class="imglogocecy" src="Logo cecytem.png">
+    </header>
+
+        <br>
+        <table class="table1">
+            <tr>
+                <td><a href="Index.html"><button><h2>PAGINA PRINCIPAL</h2></button></a></td>
+                <td><a href="HistoriaDeLaClinica.html"><button><h2>HISTORIA DE LA CLINICA</h2></button></a></td>
+                <td><a href="Estructura.html"><button><h2>ESTRUCTURA</h2></button></a></td>
+                <td><a href="AtencionMedicaQueBrinda.html"><button><h2>ATENCION MEDICA QUE BRINDA</h2></button></a></td>
+                <td><a href="SabiasQue.html"><button><h2>¿SABIAS QUÉ?</h2></button></a></td>
+            </tr>
+        </table>
+        <br><br><br>
+
+        <table width="1504" height="606" border="10">
+            <tr>
+                <td>
+                    <h2>Proceso actual para agendar citas médicas en la clínica</h2>
+                    El proceso que se realiza actualmente para agendar las citas médicas en el Centro de Salud de Santa Cruz Tepexpan 
+                    es ir a la clínica muy temprano para poder alcanzar una de las primeras fichas, después de varias horas llega el personal de la clínica y
+                    te dicen qué número de ficha eres. Después te tienes que esperar a que te toque tu turno y solo si te esperas en la clínica 
+                    alcanzas a recibir una consulta. Te anotan en una bitácora donde llevan el registro de las personas que recibirán su consulta y más tarde recibes tu consulta.
+
+                    <h2>Propuesta para agendar las citas médicas</h2>
+                    La propuesta que tenemos nosotros es que crearemos un sitio web en el que pediremos los siguientes datos: NSS o CURP, nombre del paciente, apellido paterno, apellido materno, sexo, edad, motivo 
+                    de su consulta por medio de un formulario el cual estará conectado a una base de datos. Les daremos una ficha que contenga los datos que ingresó en el formulario y se les asignará la fecha, 
+                    hora y día al que acudirá a su cita médica.
+                    
+                </td>
+                <td>
+                    <form id="formulario" onsubmit="validarFormulario(event)">
+                        <label>Número de seguro social/CURP:</label>
+                        <input type="text" name="numero"><br><br>
+
+                        <label>Nombre completo:</label>
+                        <input type="text" name="nombre"><br><br>
+
+                        <label>Edad:</label>
+                        <input type="text" name="edad"><br><br>
+
+                        <label>Sexo:</label>
+                        <select name="sexo">
+                            <option value="">Selecciona una opción</option>
+                            <option value="masculino">Masculino</option>
+                            <option value="femenino">Femenino</option>
+                            <option value="otro">Otro</option>
+                        </select><br><br>
+
+                        <label>Razón o motivo:</label>
+                        <textarea name="razon" rows="4" cols="50"></textarea><br><br>
+
+                        <label for="Hora">Selecciona una hora:</label>
+                        <input type="time" id="Hora" name="Hora"><br><br>
+
+                        <label for="fecha">Selecciona un día:</label>
+                        <input type="date" id="fecha" name="fecha"><br><br>
+
+                        <button type="submit">Enviar</button>
+                    </form>
+                </td>
+            </tr>
+        </table>
+
+        <br><br><br><br><br><br><br>
+        <footer></footer>
+    </body>
+</HTML>
